@@ -1,7 +1,7 @@
 services:
   postgres:
-    image: postgres:17.4
-    container_name: postgres_data_modeling
+    image: postgres:17
+    container_name: postgres
     restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -10,11 +10,11 @@ services:
     ports:
       - "${POSTGRES_PORT}:5432"
     volumes:
-      - data_modelling_de25:/var/lib/postgresql/data # named_volume
+      - postgres_data:/var/lib/postgresql/data # named_volume
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
       interval: 5s
       retries: 5
       timeout: 3s
 volumes:
- data_modelling_de25:
+ postgres_data:
